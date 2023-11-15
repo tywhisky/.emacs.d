@@ -1,48 +1,16 @@
-;;; early-init.el ---   -*- lexical-binding: t -*-
-
-;; Copyright (C) 2022 Chen Bin
-;;
-;; Keywords: keyword1 keyword2
-;; Author: Chen Bin <chenbin@gmail.com>
-
-;; This file is NOT part of GNU Emacs.
-
-;; This program is free software; you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 3, or (at your option)
-;; any later version.
-
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-;; GNU General Public License for more details.
-
-;; You should have received a copy of the GNU General Public License
-;; along with this program; if not, see <https://www.gnu.org/licenses/>.
+;;; early-init.el --- Emacs 27+ pre-initialisation config
 
 ;;; Commentary:
 
-;;
+;; Emacs 27+ loads this file before (normally) calling
+;; `package-initialize'.  We use this file to suppress that automatic
+;; behaviour so that startup is consistent across Emacs versions.
 
 ;;; Code:
 
-(when (or (featurep 'esup-child)
-          (fboundp 'profile-dotemacs)
-          (daemonp)
-          (boundp 'startup-now)
-          noninteractive)
-  (setq package-enable-at-startup nil))
+(setq package-enable-at-startup nil)
 
-(defvar my-computer-has-smaller-memory-p nil
-  "Installing&Compiling many packages could cost too much memory.")
-
-;; @see https://www.reddit.com/r/emacs/comments/ofhket/further_boost_start_up_time_with_a_simple_tweak/
-;; 10% speed up of startup for my configuration
-(unless my-computer-has-smaller-memory-p
-  (setq gc-cons-percentage 0.6)
-  (setq gc-cons-threshold most-positive-fixnum))
-
-(setq inhibit-startup-message t)
-
+;; So we can detect this having been loaded
 (provide 'early-init)
+
 ;;; early-init.el ends here
