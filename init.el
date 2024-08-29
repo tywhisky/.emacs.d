@@ -21,6 +21,12 @@
 
 (setq corfu-auto t)
 
+(add-to-list 'load-path "~/.config/emacs/lisp-site/lsp-bridge/")
+(require 'yasnippet)
+(yas-global-mode 1)
+(require 'lsp-bridge)
+(global-lsp-bridge-mode)
+
 (add-to-list 'package-archives
 	     (cons "melpa" "https://melpa.org/packages/") t)
 (custom-set-variables
@@ -28,7 +34,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(corfu magit with-editor transient dash)))
+ '(package-selected-packages
+   '(yasnippet markdown-mode corfu magit with-editor transient dash)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
