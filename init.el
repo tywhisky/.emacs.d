@@ -9,6 +9,11 @@
 (setq make-backup-files nil)
 (setq inhibit-startup-screen t)
 
+(require 'ido)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
 (defun my-init-file ()
   "Open the init file."
   (interactive)
