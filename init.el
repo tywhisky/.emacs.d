@@ -22,6 +22,7 @@
 (setq corfu-auto t)
 
 (add-to-list 'load-path "~/.config/emacs/lisp-site/lsp-bridge/")
+(setq lsp-bridge-elixir-lsp-server "lexical")
 (require 'yasnippet)
 (yas-global-mode 1)
 (require 'lsp-bridge)

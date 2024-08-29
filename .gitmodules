@@ -1,3 +1,6 @@
 [submodule "lisp-site/lsp-bridge"]
 	path = lisp-site/lsp-bridge
 	url = git@github.com:manateelazycat/lsp-bridge.git
+[submodule "language-server/elixir"]
+	path = language-server/elixir
+	url = git@github.com:lexical-lsp/lexical.git
