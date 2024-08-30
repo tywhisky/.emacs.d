@@ -1,4 +1,7 @@
 (set-frame-font "Iosevka 22" nil t)
+(load-theme 'ef-maris-light)
+(require 'doom-modeline)
+(doom-modeline-mode 1)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -33,8 +36,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("856bf0048f0e6cf6e1e3eba8b3ba6467ac1bc6f9d6855f43042cc90443fe8727" default))
  '(package-selected-packages
-   '(company-box company elixir-mode yasnippet markdown-mode magit with-editor transient dash)))
+   '(doom-modeline ef-themes company-box company elixir-mode yasnippet markdown-mode magit with-editor transient dash)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
