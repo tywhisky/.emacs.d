@@ -1,7 +1,12 @@
 ;; -*- lexical-binding: t -*-
 
+;; Load the `lisp` directory
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
+(require 'init-elpa)
+(require 'init-themes)
+
 (set-frame-font "Iosevka 22" nil t)
-(load-theme 'ef-maris-light :no-confirm)
 (require 'doom-modeline)
 (doom-modeline-mode 1)
 (nyan-mode 1)
@@ -34,8 +39,6 @@
 (global-set-key (kbd "C-;") 'embark-act)
 (global-set-key (kbd "C-s") 'consult-line)
 
-(add-to-list 'package-archives
-	     (cons "melpa" "https://melpa.org/packages/") t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
