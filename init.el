@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (set-frame-font "Iosevka 22" nil t)
 (load-theme 'ef-maris-light :no-confirm)
 (require 'doom-modeline)
