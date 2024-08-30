@@ -1,13 +1,14 @@
 (set-frame-font "Iosevka 22" nil t)
-(load-theme 'ef-maris-light)
+(load-theme 'ef-maris-light :no-confirm)
 (require 'doom-modeline)
 (doom-modeline-mode 1)
+(nyan-mode 1)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (add-to-list 'default-frame-alist '(height . 38))
-(add-to-list 'default-frame-alist '(width . 80))
+(add-to-list 'default-frame-alist '(width . 90))
 
 (setq make-backup-files nil)
 (setq inhibit-startup-screen t)
@@ -39,7 +40,7 @@
  '(custom-safe-themes
    '("856bf0048f0e6cf6e1e3eba8b3ba6467ac1bc6f9d6855f43042cc90443fe8727" default))
  '(package-selected-packages
-   '(doom-modeline ef-themes company-box company elixir-mode yasnippet markdown-mode magit with-editor transient dash)))
+   '(nyan-mode doom-modeline ef-themes company-box company elixir-mode yasnippet markdown-mode magit with-editor transient dash)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
