@@ -9,6 +9,7 @@
 (scroll-bar-mode -1)
 (add-to-list 'default-frame-alist '(height . 38))
 (add-to-list 'default-frame-alist '(width . 90))
+(global-display-line-numbers-mode t)
 
 (setq make-backup-files nil)
 (setq inhibit-startup-screen t)
