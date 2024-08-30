@@ -16,11 +16,6 @@
 (setq make-backup-files nil)
 (setq inhibit-startup-screen t)
 
-(require 'ido)
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
-
 (defun my/init-file ()
   "Open the init file."
   (interactive)
@@ -32,6 +27,12 @@
 (require 'eglot)
 (add-hook 'elixir-mode-hook 'eglot-ensure)
 (add-to-list 'eglot-server-programs '(elixir-mode "~/.config/emacs/language-server/elixir/release/language_server.sh"))
+
+(vertico-mode t)
+(setq completion-styles '(orderless))
+(marginalia-mode t)
+(global-set-key (kbd "C-;") 'embark-act)
+(global-set-key (kbd "C-s") 'consult-line)
 
 (add-to-list 'package-archives
 	     (cons "melpa" "https://melpa.org/packages/") t)
