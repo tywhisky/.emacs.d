@@ -40,10 +40,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("856bf0048f0e6cf6e1e3eba8b3ba6467ac1bc6f9d6855f43042cc90443fe8727" default))
  '(package-selected-packages
-   '(nyan-mode doom-modeline ef-themes company-box company elixir-mode yasnippet markdown-mode magit with-editor transient dash)))
+   '(consult embark orderless marginalia vertico nyan-mode doom-modeline ef-themes company-box company elixir-mode yasnippet markdown-mode magit with-editor transient dash)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
