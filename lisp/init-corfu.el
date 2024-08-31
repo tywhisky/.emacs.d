@@ -21,11 +21,10 @@
   (setq-default corfu-quit-no-match 'separator)
   (add-hook 'after-init-hook 'global-corfu-mode)
 
-
-
   (with-eval-after-load 'corfu
     (corfu-popupinfo-mode))
-
+  (setq-default corfu-popupinfo-delay 0.1)
+  
   ;; Make Corfu also work in terminals, without disturbing usual behaviour in GUI
   (when (maybe-require-package 'corfu-terminal)
     (with-eval-after-load 'corfu
@@ -33,7 +32,6 @@
 
   ;; TODO: https://github.com/jdtsmith/kind-icon
   )
-
 
 (provide 'init-corfu)
 ;;; init-corfu.el ends here
