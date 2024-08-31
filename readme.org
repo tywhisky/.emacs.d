@@ -1,0 +1,25 @@
+* My Personal Emacs Config
+
+** Usage
+
+*** Clone the Repo
+#+BEGIN_SRC bash
+  git clone git@github.com:tywhisky/.emacs.d.git ~/.config/emacs
+  cd ~/.config/emacs
+  git submodule init
+  git submodule update
+#+END_SRC
+
+Or you can just clone all the submodule repos by:
+
+#+BEGIN_SRC bash
+  git clone --recurse-submodules git@github.com:tywhisky/.emacs.d.git ~/.config/emacs
+#+END_SRC
+
+*** Run the Setup Script
+
+#+BEGIN_SRC
+  ./setup.sh
+#+END_SRC
+
+*** Open the Emacs and Happy Hacking!
