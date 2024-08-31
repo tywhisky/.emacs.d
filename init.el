@@ -17,6 +17,7 @@
 (require 'init-corfu)
 (require 'init-eglot)
 (require 'init-git)
+(require 'init-terminals)
 
 ;; Languages
 (require 'init-elixir)
