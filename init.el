@@ -4,7 +4,7 @@
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;; Set the custom path to prevent the package-selected-packages generate in init.el
-(setq custom-file (locate-user-emacs-file "custome.el"))
+(setq custom-file (locate-user-emacs-file "custom.el"))
 ;; Common
 (require 'init-utils)
 (require 'init-elpa)
