@@ -15,6 +15,7 @@
 (require 'init-minibuffer)
 (require 'init-markdown)
 (require 'init-corfu)
+(require 'init-snippet)
 (require 'init-eglot)
 (require 'init-git)
 (require 'init-terminals)
