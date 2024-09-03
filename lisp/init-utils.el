@@ -9,7 +9,7 @@
     (add-to-list 'auto-mode-alist (cons pattern mode))))
 
 ;; Open my `init.el`
-(defun my/init-file ()
+(defun open-init-file ()
   "Open the init file."
   (interactive)
   (find-file user-init-file))
