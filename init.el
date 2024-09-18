@@ -20,6 +20,7 @@
 (require 'init-eglot)
 (require 'init-git)
 (require 'init-terminals)
+(require 'init-projectile)
 
 ;; Languages
 (require 'init-elixir)
