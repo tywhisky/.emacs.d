@@ -10,6 +10,7 @@
 (require 'init-elpa)
 
 (require 'init-gui-frames)
+(require 'init-key-mapping)
 (require 'init-themes)
 (require 'init-modeline)
 (require 'init-minibuffer)

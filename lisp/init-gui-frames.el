@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(set-frame-font "Iosevka 22" nil t)
+(set-frame-font "Iosevka Nerd Font 16" nil t)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
