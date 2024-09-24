@@ -4,6 +4,9 @@
 
 (maybe-require-package 'elixir-mode)
 
-(add-hook 'elixir-mode-hook 'eglot-ensure)
+(add-hook 'elixir-mode-hook
+          (lambda ()
+            (eglot-ensure)
+            (add-hook 'before-save-hook #'elixir-format nil t)))
 
 (provide 'init-elixir)
