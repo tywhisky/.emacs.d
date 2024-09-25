@@ -9,6 +9,12 @@
 (scroll-bar-mode -1)
 
 (add-to-list 'default-frame-alist '(undecorated-round . t))
+
+(require-package 'moom)
+(with-eval-after-load 'moom
+  (setq moom-use-font-module nil)
+  (moom-mode 1))
+
 (add-to-list 'default-frame-alist '(height . 38))
 (add-to-list 'default-frame-alist '(width . 90))
 
