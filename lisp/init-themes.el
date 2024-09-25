@@ -9,6 +9,7 @@
 (setq custom-safe-themes t)
 
 ;; Set the default theme
-(load-theme 'ef-maris-light t)
+;; (load-theme 'ef-maris-light t)
+(load-theme 'ef-elea-dark t)
 
 (provide 'init-themes)
