@@ -8,6 +8,7 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
+(add-to-list 'default-frame-alist '(undecorated-round . t))
 (add-to-list 'default-frame-alist '(height . 38))
 (add-to-list 'default-frame-alist '(width . 90))
 
