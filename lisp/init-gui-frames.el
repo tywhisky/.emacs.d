@@ -2,7 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(set-frame-font "Iosevka Nerd Font 16" nil t)
+;; Set English Font Family
+;; (set-frame-font "Iosevka Nerd Font 16" nil t)
+(set-frame-font "Maple Mono 14" nil t)
+
+;; 设置中文字体
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+  (set-fontset-font t charset (font-spec :family "Kaiti SC" :size 15)))
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
