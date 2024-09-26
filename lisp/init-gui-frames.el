@@ -8,7 +8,7 @@
 
 ;; 设置中文字体
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
-  (set-fontset-font t charset (font-spec :family "Kaiti SC" :size 15)))
+  (set-fontset-font t charset (font-spec :family "LXGW WenKai" :size 15)))
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
