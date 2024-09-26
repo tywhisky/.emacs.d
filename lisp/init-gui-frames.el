@@ -14,9 +14,11 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
+(desktop-save-mode 1)
+
 (add-to-list 'default-frame-alist '(undecorated-round . t))
 
-(require-package 'moom)
+(maybe-require-package 'moom)
 (with-eval-after-load 'moom
   (setq moom-use-font-module nil)
   (moom-mode 1))
