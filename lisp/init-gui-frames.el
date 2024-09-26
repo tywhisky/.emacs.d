@@ -23,8 +23,8 @@
   (setq moom-use-font-module nil)
   (moom-mode 1))
 
-(add-to-list 'default-frame-alist '(height . 38))
-(add-to-list 'default-frame-alist '(width . 90))
+(setq default-frame-alist '((width . 90)
+                            (height . 38)))
 
 (global-display-line-numbers-mode t)
 
