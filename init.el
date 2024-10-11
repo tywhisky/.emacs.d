@@ -23,4 +23,6 @@
 (require 'init-projectile)
 
 ;; Languages
+(require 'init-erlang)
 (require 'init-elixir)
+
