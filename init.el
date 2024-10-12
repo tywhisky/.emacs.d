@@ -21,8 +21,10 @@
 (require 'init-git)
 (require 'init-terminals)
 (require 'init-projectile)
+(require 'init-spelling)
 
 ;; Languages
 (require 'init-erlang)
 (require 'init-elixir)
+(require 'init-javascript)
 

@@ -6,7 +6,6 @@
 
 (add-hook 'elixir-mode-hook
           (lambda ()
-            (eglot-ensure)
             (add-hook 'before-save-hook #'elixir-format nil t)))
 
 (provide 'init-elixir)
