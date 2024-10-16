@@ -6,11 +6,11 @@
 ;; first-time startup on Emacs > 26.3.
 (setq custom-safe-themes t)
 
-(maybe-require-package 'color-theme-sanityinc-tomorrow)
+;; (maybe-require-package 'color-theme-sanityinc-tomorrow)
 (maybe-require-package 'ef-themes)
 
 ;; Set the default theme
 ;; (load-theme 'ef-maris-light t)
-(load-theme 'ef-elea-dark t)
+(load-theme 'ef-light t)
 
 (provide 'init-themes)
