@@ -22,6 +22,7 @@
 (require 'init-terminals)
 (require 'init-projectile)
 (require 'init-spelling)
+(require 'init-treesitter)
 
 ;; Languages
 (require 'init-erlang)
