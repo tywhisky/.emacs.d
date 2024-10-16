@@ -10,21 +10,20 @@
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font t charset (font-spec :family "LXGW WenKai" :size 15)))
 
+;; Remove tool-bar; menu-bar; scroll-bar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-
-(desktop-save-mode 1)
-
+;; Hide the title-bar with round corners, only for emacs 30+
 (add-to-list 'default-frame-alist '(undecorated-round . t))
+
+;; Save the last session before exit emacs
+(desktop-save-mode 1)
 
 (maybe-require-package 'moom)
 (with-eval-after-load 'moom
   (setq moom-use-font-module nil)
   (moom-mode 1))
-
-(setq default-frame-alist '((width . 90)
-                            (height . 38)))
 
 (global-display-line-numbers-mode t)
 

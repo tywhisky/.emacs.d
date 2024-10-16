@@ -8,6 +8,10 @@
   (dolist (pattern patterns)
     (add-to-list 'auto-mode-alist (cons pattern mode))))
 
+(defun sanityinc/major-mode-lighter (mode name)
+  (add-hook (derived-mode-hook-name mode)
+            (apply-partially 'sanityinc/set-major-mode-name name)))
+
 ;; Open my `init.el`
 (defun open-init-file ()
   "Open the init file."
