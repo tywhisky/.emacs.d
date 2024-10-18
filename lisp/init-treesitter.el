@@ -52,7 +52,6 @@ Return a list of languages seen along the way."
 
 (sanityinc/auto-configure-treesitter)
 
-
 ;;; Support remapping of additional libraries
 
 (defun sanityinc/remap-ts-mode (non-ts-mode ts-mode grammar)

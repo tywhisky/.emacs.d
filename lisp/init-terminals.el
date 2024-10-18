@@ -20,5 +20,10 @@
 
   (global-set-key (kbd "C-c t") 'eat-other-window))
 
+;; Install the exec-path-from-shell
+(maybe-require-package 'exec-path-from-shell)
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 (provide 'init-terminals)
 ;;; init-terminals.el ends here

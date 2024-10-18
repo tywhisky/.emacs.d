@@ -12,7 +12,7 @@
                  "typescript-language-server" "--stdio")))
 
 (add-hook 'elixir-mode-hook 'eglot-ensure)
-(add-hook 'typescript-mode-hook 'eglot-ensure)
+(add-hook 'typescript-ts-mode-hook 'eglot-ensure)
 
 (provide 'init-eglot)
 ;;; init-eglot.el ends here
