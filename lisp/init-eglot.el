@@ -11,7 +11,7 @@
                '((js-ts-mode typescript-ts-mode tsx-ts-mode)
                  "typescript-language-server" "--stdio")))
 
-(add-hook 'elixir-mode-hook 'eglot-ensure)
+(add-hook 'elixir-ts-mode-hook 'eglot-ensure)
 (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
 
 (provide 'init-eglot)
