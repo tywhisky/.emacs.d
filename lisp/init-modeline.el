@@ -15,14 +15,13 @@
 ;; (setq doom-modeline-height 23)
 (if (facep 'mode-line-active)
     (set-face-attribute 'mode-line-active nil
-			:family "Maple Mono"
-			:slant 'italic
+			:family "FantasqueSansM Nerd Font Propo"
 			:weight 'semi-light)
   (set-face-attribute 'mode-line nil
-		      :family "Maple Mono"
+		      :family "FantasqueSansM Nerd Font Propo"
 		      :slant 'italic))
 (set-face-attribute 'mode-line-inactive nil
-		    :family "Maple Mono"
+		    :family "FantasqueSansM Nerd Font Propo"
 		    :slant 'italic
 		    :weight 'semi-light)
 
