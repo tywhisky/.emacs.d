@@ -24,10 +24,4 @@ Or you can just clone all the submodule repos by:
   git clone --recurse-submodules git@github.com:tywhisky/.emacs.d.git ~/.config/emacs
 #+END_SRC
 
-*** Run the Setup Script
-
-#+BEGIN_SRC
-  ./setup.sh
-#+END_SRC
-
 *** Open the Emacs and Happy Hacking!
