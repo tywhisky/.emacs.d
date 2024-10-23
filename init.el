@@ -11,6 +11,7 @@
 
 (require 'init-gui-frames)
 (require 'init-key-mapping)
+(require 'init-exec-path)
 (require 'init-themes)
 (require 'init-modeline)
 (require 'init-minibuffer)
@@ -28,4 +29,3 @@
 (require 'init-erlang)
 (require 'init-elixir)
 (require 'init-javascript)
-

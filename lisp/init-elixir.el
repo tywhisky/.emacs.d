@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(maybe-require-package 'elixir-mode)
+(maybe-require-package 'elixir-ts-mode)
 
 (add-hook 'elixir-mode-hook
           (lambda ()
