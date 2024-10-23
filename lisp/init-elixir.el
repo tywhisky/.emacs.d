@@ -4,7 +4,7 @@
 
 (maybe-require-package 'elixir-ts-mode)
 
-(add-hook 'elixir-mode-hook
+(add-hook 'elixir-ts-mode-hook
           (lambda ()
             (add-hook 'before-save-hook #'elixir-format nil t)))
 
