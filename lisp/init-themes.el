@@ -9,8 +9,9 @@
 ;; (maybe-require-package 'color-theme-sanityinc-tomorrow)
 (maybe-require-package 'ef-themes)
 
-;; Set the default theme
-;; (load-theme 'ef-maris-light t)
-(load-theme 'ef-light t)
+;; Set the default theme for terminal and GUI emacs
+(if (display-graphic-p)
+    (load-theme 'ef-light t) 
+  (load-theme 'ef-night t))
 
 (provide 'init-themes)
