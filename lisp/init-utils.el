@@ -18,9 +18,11 @@
             (apply-partially 'sanityinc/set-major-mode-name name)))
 
 ;; Open my `init.el`
-(defun open-init-file ()
+(defun tywhisky/open-init-file ()
   "Open the init file."
   (interactive)
   (find-file user-init-file))
+
+(global-set-key (kbd "C-c i") 'tywhisky/open-init-file)
 
 (provide 'init-utils)
