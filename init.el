@@ -8,7 +8,6 @@
 ;; Common
 (require 'init-utils)
 (require 'init-elpa)
-
 (require 'init-gui-frames)
 (require 'init-key-mapping)
 (require 'init-exec-path)
@@ -24,6 +23,8 @@
 (require 'init-projectile)
 (require 'init-spelling)
 (require 'init-treesitter)
+
+(require 'init-elfeed)
 
 ;; Languages
 (require 'init-erlang)
