@@ -30,3 +30,4 @@
 (require 'init-erlang)
 (require 'init-elixir)
 (require 'init-javascript)
+(require 'init-golang)

@@ -9,3 +9,4 @@
             (add-hook 'before-save-hook #'elixir-format nil t)))
 
 (provide 'init-elixir)
+;;; init-elixir.el ends here

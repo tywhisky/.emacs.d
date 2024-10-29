@@ -7,7 +7,8 @@
 (global-set-key (kbd "C-x w") 'elfeed)
 
 (setq elfeed-feeds
-      '(("http://nullprogram.com/feed/" blog emacs)
+      '(("https://elixir-lang.org/atom.xml" elixir)
+	("http://nullprogram.com/feed/" blog emacs)
         ("https://planet.emacslife.com/atom.xml" emacs)
 	("https://sachachua.com/blog/feed/index.xml" blog emacs)
 	("https://antfu.me/feed.xml" blog frontend)
