@@ -1,4 +1,4 @@
-;;; init-git.el --- Git SCM support -*- lexical-binding: t -*-
+;;; init-snippet.el --- Snippet support -*- lexical-binding: t -*-
 ;;; Commentary:
 
 ;; See also init-github.el.
@@ -10,3 +10,4 @@
   (maybe-require-package 'yasnippet-snippets))
 
 (provide 'init-snippet)
+;;; init-snippet ends here

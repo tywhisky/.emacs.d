@@ -29,3 +29,4 @@
 (display-battery-mode 1)
 
 (provide 'init-modeline)
+;;; init-modeline.el ends here

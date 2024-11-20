@@ -56,3 +56,4 @@ locate PACKAGE."
 (package-initialize)
 
 (provide 'init-elpa)
+;;; init-elpa.el ends here

@@ -15,3 +15,4 @@
   (load-theme 'ef-night t))
 
 (provide 'init-themes)
+;;; init-themes.el ends here

@@ -17,4 +17,4 @@
 
 (provide 'init-sis)
 
-;;; init-sis.el ends here.
+;;; init-sis.el ends here

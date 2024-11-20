@@ -26,3 +26,4 @@
 (global-set-key (kbd "C-c i") 'tywhisky/open-init-file)
 
 (provide 'init-utils)
+;;; init-utils.el ends here
