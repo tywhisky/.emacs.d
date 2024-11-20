@@ -11,6 +11,7 @@
 (require 'init-exec-path)
 
 ;; UI & Appearance
+(require 'init-editing-utils)
 (require 'init-gui-frames)
 (require 'init-themes)
 (require 'init-modeline)
