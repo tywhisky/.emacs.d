@@ -17,8 +17,11 @@
 ;; Hide the title-bar with round corners, only for emacs 30+
 (add-to-list 'default-frame-alist '(undecorated-round . t))
 
-;; Save the last session before exit emacs
-(desktop-save-mode 1)
+(if (display-graphic-p)
+    ;; If in GUI mode, enable desktop-save-mode
+    (desktop-save-mode 1)
+  ;; If in terminal mode, disable desktop-save-mode
+  (desktop-save-mode -1))
 
 (maybe-require-package 'moom)
 (with-eval-after-load 'moom
