@@ -31,12 +31,12 @@
 (require 'init-git)
 (require 'init-terminals)
 (require 'init-projectile)
+(require 'init-docker)
 
 ;; External Features
 (require 'init-elfeed)
 
 ;; Language-Specific Configurations
 (require 'init-erlang)
-(require 'init-elixir)
 (require 'init-javascript)
 (require 'init-golang)

@@ -17,6 +17,12 @@
   (add-hook (derived-mode-hook-name mode)
             (apply-partially 'sanityinc/set-major-mode-name name)))
 
+(defmacro sanityinc/fullframe-mode (mode)
+  "Configure buffers that open in MODE to display in full-frame."
+  `(add-to-list 'display-buffer-alist
+                (cons (cons 'major-mode ,mode)
+                      (list 'sanityinc/display-buffer-full-frame))))
+
 ;; Open my `init.el`
 (defun tywhisky/open-init-file ()
   "Open the init file."
