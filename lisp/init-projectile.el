@@ -3,6 +3,7 @@
 ;;; Code:
 
 (when (maybe-require-package 'projectile)
+  (maybe-require-package 'ripgrep)
   (add-hook 'after-init-hook 'projectile-mode)
 
   ;; Shorter modeline
