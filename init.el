@@ -16,6 +16,7 @@
 (require 'init-themes)
 (require 'init-modeline)
 (require 'init-minibuffer)
+(require 'init-ibuffer)
 
 ;; Editing Enhancements
 (require 'init-key-mapping)
