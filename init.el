@@ -5,11 +5,14 @@
 
 ;; Set the custom path to prevent the package-selected-packages generate in init.el
 (setq custom-file (locate-user-emacs-file "custom.el"))
+
+
 ;; Core
 (require 'init-utils)
 (require 'init-elpa)
 (require 'init-exec-path)
 
+
 ;; UI & Appearance
 (require 'init-editing-utils)
 (require 'init-gui-frames)
@@ -18,6 +21,7 @@
 (require 'init-minibuffer)
 (require 'init-ibuffer)
 
+
 ;; Editing Enhancements
 (require 'init-key-mapping)
 (require 'init-markdown)
@@ -27,6 +31,7 @@
 (require 'init-treesitter)
 (require 'init-sis)
 
+
 ;; Development Tools
 (require 'init-eglot)
 (require 'init-git)
@@ -34,9 +39,11 @@
 (require 'init-projectile)
 (require 'init-docker)
 
+
 ;; External Features
 (require 'init-elfeed)
 
+
 ;; Language-Specific Configurations
 (require 'init-erlang)
 (require 'init-elixir)
