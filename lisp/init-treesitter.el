@@ -72,6 +72,7 @@ Return a list of languages seen along the way."
 ;; Grammer
 (setq treesit-language-source-alist
       '((elixir . ("https://github.com/elixir-lang/tree-sitter-elixir.git"))
+        (heex . ("https://github.com/phoenixframework/tree-sitter-heex.git"))
         (bash . ("https://github.com/tree-sitter/tree-sitter-bash"))
         (css . ("https://github.com/tree-sitter/tree-sitter-css"))
         (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"))
