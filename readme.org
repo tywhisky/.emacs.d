@@ -25,3 +25,12 @@ Or you can just clone all the submodule repos by:
 #+END_SRC
 
 *** Open the Emacs and Happy Hacking!
+
+** Font Family
+
+*** Editor
+- English: Maple Mono
+- Chinese: LXGW WenKai
+
+*** Modeline
+- English: FantasqueSansM Nerd Font
