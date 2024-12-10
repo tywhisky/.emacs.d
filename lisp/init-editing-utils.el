@@ -260,6 +260,11 @@ ORIG is the advised function, which is called with its ARGS."
 
 (advice-add 'kmacro-call-macro :around 'sanityinc/disable-features-during-macro-call)
 
+
+(maybe-require-package 'super-save)
+(super-save-mode +1)
+(setq super-save-auto-save-when-idle t)
+
 
 (provide 'init-editing-utils)
 ;;; init-editing-utils.el ends here
