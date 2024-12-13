@@ -140,9 +140,16 @@
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-
 ;; Show matching parens
-(add-hook 'after-init-hook 'show-paren-mode)
+(add-hook 'after-init-hook
+          (lambda ()
+            (show-paren-mode)
+            (custom-set-faces
+             '(show-paren-match ((t (:weight bold)))))
+              (setq show-paren-when-point-inside-paren t
+                    show-paren-when-point-in-periphery t
+                    show-paren-context-when-offscreen t
+                    show-paren-delay 0.2)))
 
 (when (fboundp 'repeat-mode)
   (add-hook 'after-init-hook 'repeat-mode))
