@@ -7,7 +7,7 @@
 
 (add-hook 'elixir-ts-mode-hook
           (lambda ()
-            (add-hook 'before-save-hook #'elixir-format nil t)))
+            (add-hook 'before-save-hook #'eglot-format nil t)))
 
 (provide 'init-elixir)
 ;;; init-elixir.el ends here
