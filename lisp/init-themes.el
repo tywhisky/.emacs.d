@@ -14,5 +14,10 @@
     (load-theme 'ef-light t) 
   (load-theme 'ef-night t))
 
+(ef-themes-with-colors
+  (custom-set-faces
+   `(fill-column-indicator ((,c :height 0.10)))))
+
+
 (provide 'init-themes)
 ;;; init-themes.el ends here
