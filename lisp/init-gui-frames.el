@@ -2,6 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
+
+;; Favor font list:
+;; Monaspace Neon Var
+;; Maple Mono
+;; LXGW WenKai
+;; FantasqueSansM Nerd Font Propo
+
 ;; Set English Font Family
 ;; (set-frame-font "Iosevka Nerd Font 16" nil t)
 (set-frame-font "Maple Mono 14" nil t)
@@ -16,7 +23,7 @@
 (scroll-bar-mode -1)
 ;; Hide the title-bar with round corners, only for emacs 30+
 (add-to-list 'default-frame-alist '(undecorated-round . t))
-
+
 (if (display-graphic-p)
     ;; If in GUI mode, enable desktop-save-mode
     (desktop-save-mode 1)
