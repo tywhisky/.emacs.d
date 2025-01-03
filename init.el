@@ -50,3 +50,4 @@
 (require 'init-elixir)
 (require 'init-javascript)
 (require 'init-golang)
+(require 'init-dotnet)
