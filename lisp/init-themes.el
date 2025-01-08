@@ -6,19 +6,12 @@
 ;; first-time startup on Emacs > 26.3.
 (setq custom-safe-themes t)
 
-;; (maybe-require-package 'color-theme-sanityinc-tomorrow)
-(maybe-require-package 'ef-themes)
-
 
 ;; Set the default theme for terminal and GUI emacs
 
 (if (display-graphic-p)
-    (load-theme 'ef-light t) 
-  (load-theme 'ef-night t))
-
-(ef-themes-with-colors
-  (custom-set-faces
-   `(fill-column-indicator ((,c :height 0.10)))))
+    (load-theme 'modus-operandi-tinted t) 
+  (load-theme 'modus-vivendi-tinted t))
 
 
 
