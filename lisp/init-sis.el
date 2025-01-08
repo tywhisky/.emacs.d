@@ -9,7 +9,7 @@
  "com.apple.inputmethod.SCIM.ITABC")
 
 (sis-global-cursor-color-mode t)
-(setq sis-other-cursor-color "red")
+(setq sis-other-cursor-color (face-attribute 'default :background))
 
 (sis-global-respect-mode t)
 (sis-global-context-mode t)
