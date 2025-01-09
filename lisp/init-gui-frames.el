@@ -40,5 +40,21 @@
 (setq make-backup-files nil)
 (setq inhibit-startup-screen t)
 
+
+;; Add the directory to the load path if you cloned the repository manually
+;; (add-to-list 'load-path "~/code/emacs/ultra-scroll")
+
+;; Initialize the settings
+(setq scroll-conservatively 101) ; important!
+(setq scroll-margin 0)
+
+;; Load and enable the ultra-scroll mode
+(maybe-require-package 'ultra-scroll)
+(ultra-scroll-mode 1)
+
+(global-set-key (kbd "<pinch>") 'ignore)
+(global-set-key (kbd "<C-wheel-up>") 'ignore)
+(global-set-key (kbd "<C-wheel-down>") 'ignore)
+
 (provide 'init-gui-frames)
 ;;; init-gui-frames.el ends here
