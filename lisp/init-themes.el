@@ -15,6 +15,13 @@
 
 
 
+;; Modus Themes Config
+(modus-themes-with-colors
+  (custom-set-faces
+   `(fill-column-indicator ((,c :height 0.1 :background ,bg-inactive :foreground ,bg-inactive)))))
+
+
+
 (defun advise-dimmer-config-change-handler ()
   "Advise to only force process if no predicate is truthy."
   (let ((ignore (cl-some (lambda (f) (and (fboundp f) (funcall f)))

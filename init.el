@@ -14,9 +14,9 @@
 
 
 ;; UI & Appearance
+(require 'init-themes)
 (require 'init-editing-utils)
 (require 'init-gui-frames)
-(require 'init-themes)
 (require 'init-modeline)
 (require 'init-minibuffer)
 (require 'init-ibuffer)
