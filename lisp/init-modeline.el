@@ -25,8 +25,8 @@
 		    :slant 'italic
 		    :weight 'semi-light)
 
-(display-time-mode 1)
-(display-battery-mode 1)
+;;(display-time-mode 1)
+;;(display-battery-mode 1)
 
 (provide 'init-modeline)
 ;;; init-modeline.el ends here
