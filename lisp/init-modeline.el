@@ -5,25 +5,32 @@
 (maybe-require-package 'doom-modeline)
 (doom-modeline-mode 1)
 
+
+;; Configuration for modeline
+
+;; Remove modeline border
+(set-face-attribute 'mode-line nil :box nil)
+
+
+;; Configuration for doom-modeline
+
 ;; doom-modeline-position-column-line-format need
 ;; both column-number-mode and line-number-mode enabled
 (column-number-mode 1)
 (line-number-mode 1)
 (setq doom-modeline-position-column-line-format '("%l:%c"))
 
-;; specify font family and size in modeline
-;; (setq doom-modeline-height 23)
-(if (facep 'mode-line-active)
-    (set-face-attribute 'mode-line-active nil
-			:family "FantasqueSansM Nerd Font Propo"
-			:weight 'semi-light)
-  (set-face-attribute 'mode-line nil
-		      :family "FantasqueSansM Nerd Font Propo"
-		      :slant 'italic))
-(set-face-attribute 'mode-line-inactive nil
-		    :family "FantasqueSansM Nerd Font Propo"
-		    :slant 'italic
-		    :weight 'semi-light)
+(setq doom-modeline-height 30)
+
+;; modeline face settings
+(let ((family "Roboto Mono")
+      (slant 'italic)
+      (weight 'light)
+      (box nil))
+  (custom-set-faces
+   `(mode-line ((t (:family ,family :slant ,slant :weight ,weight :box ,box))))
+   `(mode-line-active ((t (:family ,family :slant ,slant :weight ,weight :box ,box))))
+   `(mode-line-inactive ((t (:family ,family :slant ,slant :weight ,weight :box ,box))))))
 
 ;;(display-time-mode 1)
 ;;(display-battery-mode 1)
