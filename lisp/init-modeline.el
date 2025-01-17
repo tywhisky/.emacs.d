@@ -21,8 +21,11 @@
 (setq doom-modeline-position-column-line-format '("%l:%c"))
 
 (setq doom-modeline-height 30)
+(setq doom-modeline-icon nil)
 
-;; modeline face settings
+(set-face-background 'doom-modeline-bar (face-background 'mode-line))
+
+;; Font Family
 (let ((family "Roboto Mono")
       (slant 'italic)
       (weight 'light)
@@ -31,9 +34,6 @@
    `(mode-line ((t (:family ,family :slant ,slant :weight ,weight :box ,box))))
    `(mode-line-active ((t (:family ,family :slant ,slant :weight ,weight :box ,box))))
    `(mode-line-inactive ((t (:family ,family :slant ,slant :weight ,weight :box ,box))))))
-
-;;(display-time-mode 1)
-;;(display-battery-mode 1)
 
 (provide 'init-modeline)
 ;;; init-modeline.el ends here
