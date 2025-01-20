@@ -86,6 +86,8 @@
   (diminish 'subword-mode))
 
 
+(global-display-fill-column-indicator-mode 1)
+
 
 (when (fboundp 'display-line-numbers-mode)
   (setq-default display-line-numbers-width 3)
