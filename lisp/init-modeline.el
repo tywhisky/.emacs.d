@@ -31,12 +31,13 @@
 
 (let ((family "Roboto Mono")
       (slant 'italic)
-      (weight 'normal)
+      (height 0.95)
+      (weight 'light)
       (box nil))
   (custom-set-faces
-   `(mode-line ((t (:family ,family :slant ,slant :weight ,weight :box ,box))))
-   `(mode-line-active ((t (:family ,family :slant ,slant :weight ,weight :box ,box))))
-   `(mode-line-inactive ((t (:family ,family :slant ,slant :weight ,weight :box ,box))))))
+   `(mode-line ((t (:family ,family :slant ,slant :height ,height :weight ,weight :box ,box))))
+   `(mode-line-active ((t (:family ,family :slant ,slant :height ,height :weight ,weight :box ,box))))
+   `(mode-line-inactive ((t (:family ,family :slant ,slant :height ,height :weight ,weight :box ,box))))))
 
 (provide 'init-modeline)
 ;;; init-modeline.el ends here

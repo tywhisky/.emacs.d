@@ -11,7 +11,7 @@
 
 ;; Set English Font Family
 ;; (set-frame-font "Iosevka Nerd Font 16" nil t)
-(set-frame-font "Maple Mono 14" nil t)
+(set-frame-font "FantasqueSansM Nerd Font Propo 16" nil t)
 
 ;; 设置中文字体
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
