@@ -22,13 +22,16 @@
 
 (setq doom-modeline-height 30)
 (setq doom-modeline-icon nil)
+(setq doom-modeline-buffer-encoding nil)
+(setq doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode))
 
 (set-face-background 'doom-modeline-bar (face-background 'mode-line))
+(set-face-background 'doom-modeline-bar-inactive (face-background 'mode-line-inactive))
+(setq doom-modeline-bar-width 1)
 
-;; Font Family
 (let ((family "Roboto Mono")
       (slant 'italic)
-      (weight 'light)
+      (weight 'normal)
       (box nil))
   (custom-set-faces
    `(mode-line ((t (:family ,family :slant ,slant :weight ,weight :box ,box))))
