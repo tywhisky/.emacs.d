@@ -11,7 +11,7 @@
 
 ;; Set English Font Family
 ;; (set-frame-font "Iosevka Nerd Font 16" nil t)
-(set-frame-font "FantasqueSansM Nerd Font Propo 16" nil t)
+(set-frame-font "FantasqueSansM Nerd Font Mono 16" nil t)
 
 ;; 设置中文字体
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -41,16 +41,10 @@
 (setq inhibit-startup-screen t)
 
 
-;; Add the directory to the load path if you cloned the repository manually
-;; (add-to-list 'load-path "~/code/emacs/ultra-scroll")
 
 ;; Initialize the settings
 (setq scroll-conservatively 101) ; important!
 (setq scroll-margin 0)
-
-;; Load and enable the ultra-scroll mode
-(maybe-require-package 'ultra-scroll)
-(ultra-scroll-mode 1)
 
 (global-set-key (kbd "<pinch>") 'ignore)
 (global-set-key (kbd "<C-wheel-up>") 'ignore)
