@@ -8,12 +8,14 @@
  "com.apple.keylayout.ABC"
  "com.apple.inputmethod.SCIM.ITABC")
 
-(sis-global-cursor-color-mode t)
 (setq sis-other-cursor-color (face-foreground 'success nil t))
 
-(sis-global-respect-mode t)
-(sis-global-context-mode t)
-(sis-global-inline-mode t)
+(if (display-graphic-p)
+    (progn
+      (sis-global-cursor-color-mode t)
+      (sis-global-respect-mode t)
+      (sis-global-context-mode t)
+      (sis-global-inline-mode t)))
 
 (provide 'init-sis)
 
