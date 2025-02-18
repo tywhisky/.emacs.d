@@ -1,7 +1,8 @@
 ;; -*- lexical-binding: t -*-
 
-;; Load the `lisp` directory
+;; Load the `lisp` and `site-lisp` directory
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "site-lisp"))
 
 ;; Set the custom path to prevent the package-selected-packages generate in init.el
 (setq custom-file (locate-user-emacs-file "custom.el"))
@@ -9,6 +10,7 @@
 
 ;; Core
 (require 'init-utils)
+(require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
 (require 'init-elpa)
 (require 'init-exec-path)
 
