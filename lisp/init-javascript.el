@@ -9,7 +9,7 @@
 
 ;;; Basic js-mode setup
 
-(add-to-list 'auto-mode-alist '("\\.\\(js\\|es6\\)\\(\\.erb\\)?\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(js\\|es6\\)\\(\\.ts\\)\\(\\.tsx\\)?\\'" . typescript-ts-mode))
 
 (with-eval-after-load 'js
   (sanityinc/major-mode-lighter 'js-mode "JS")
