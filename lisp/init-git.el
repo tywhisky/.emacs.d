@@ -13,7 +13,8 @@
 (global-blamer-mode 1)
 
 (setq blamer-idle-time 0.3
-      blamer-min-offset 70)
+      blamer-min-offset 70
+      blamer-type 'visual)
 
 (set-face-attribute 'blamer-face nil
                     :foreground "#7a88cf"
