@@ -9,16 +9,18 @@
 
 ;; Set the default theme for terminal and GUI emacs
 
+(maybe-require-package 'standard-themes)
+(maybe-require-package 'modus-themes)
+
 (if (display-graphic-p)
-    (load-theme 'modus-operandi-tinted t) 
+    (load-theme 'standard-light t) 
   (load-theme 'modus-vivendi-tinted t))
 
 
-
-;; Modus Themes Config
-(modus-themes-with-colors
-  (custom-set-faces
-   `(fill-column-indicator ((,c :height 0.1 :background ,bg-inactive :foreground ,bg-inactive)))))
+;; Common Theme Config
+(custom-set-faces
+ '(fill-column-indicator
+   ((t (:height 0.1)))))
 
 
 
