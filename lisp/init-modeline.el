@@ -20,7 +20,7 @@
 (line-number-mode 1)
 (setq doom-modeline-position-column-line-format '("%l:%c"))
 
-(setq doom-modeline-height 30)
+(setq doom-modeline-height 25)
 (setq doom-modeline-icon nil)
 (setq doom-modeline-buffer-encoding nil)
 (setq doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode))

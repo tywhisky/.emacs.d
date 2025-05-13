@@ -41,6 +41,20 @@
 (setq inhibit-startup-screen t)
 
 
+(maybe-require-package 'spacious-padding)
+
+(setq spacious-padding-windths
+      '( :internal-border-width 15
+         :header-line-width 4
+         :mode-line-width 4
+         :tab-width 4
+         :right-divider-width 30
+         :scroll-bar-width 8
+         :fringe-width 0))
+
+(spacious-padding-mode 1)
+
+
 
 ;; Initialize the settings
 (setq scroll-conservatively 101) ; important!
