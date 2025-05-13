@@ -43,7 +43,7 @@
    #'corfu-frame-p))
 
 (when (maybe-require-package 'dimmer)
-  (setq-default dimmer-fraction 0.3)
+  (setq-default dimmer-fraction 0.5)
   (setq-default dimmer-adjustment-mode :foreground)
   (setq-default dimmer-use-colorspace :rgb)
   (add-hook 'after-init-hook 'dimmer-mode)
