@@ -17,6 +17,11 @@
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font t charset (font-spec :family "LXGW WenKai" :size 15)))
 
+(set-face-attribute 'line-number nil
+                    :family "Fira Code"
+                    :height 135
+                    :weight 'normal)
+
 ;; Remove tool-bar; menu-bar; scroll-bar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
