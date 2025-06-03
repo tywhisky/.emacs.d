@@ -29,6 +29,9 @@
   (interactive)
   (find-file user-init-file))
 
+(when (string= system-type "darwin")       
+  (setq dired-use-ls-dired nil))
+
 (global-set-key (kbd "C-c i") 'tywhisky/open-init-file)
 
 (provide 'init-utils)
