@@ -10,5 +10,8 @@
 (setq chatgpt-shell-google-key
       (auth-source-pick-first-password :host "generativelanguage.googleapis.com"))
 
+(setq chatgpt-shell-openai-key
+      (auth-source-pick-first-password :host "openai"))
+
 (provide 'init-gpt)
 ;;; init-gpt.el ends here
