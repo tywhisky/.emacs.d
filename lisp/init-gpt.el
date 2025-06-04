@@ -2,16 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(maybe-require-package 'chatgpt-shell)
+(maybe-require-package 'gptel)
 
-(setq chatgpt-shell-deepseek-key
-      (auth-source-pick-first-password :host "api.deepseek.com"))
-
-(setq chatgpt-shell-google-key
-      (auth-source-pick-first-password :host "generativelanguage.googleapis.com"))
-
-(setq chatgpt-shell-openai-key
-      (auth-source-pick-first-password :host "openai"))
+(setq gptel-api-key (auth-source-pick-first-password :host "openai"))
+(gptel-make-gemini "Gemini" :key (auth-source-pick-first-password :host "gemini") :stream t)
+(gptel-make-deepseek "DeepSeek"       
+  :stream t                           
+  :key (auth-source-pick-first-password :host "deepseek"))  
 
 (provide 'init-gpt)
 ;;; init-gpt.el ends here
