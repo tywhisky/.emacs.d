@@ -42,6 +42,7 @@
 (require 'init-docker)
 
 ;; AI
+(require 'init-chat)
 (require 'init-copilot)
 
 
