@@ -40,7 +40,9 @@
 (require 'init-terminals)
 (require 'init-projectile)
 (require 'init-docker)
-(require 'init-gpt)
+
+;; AI
+(require 'init-copilot)
 
 
 ;; External Features

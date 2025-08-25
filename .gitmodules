@@ -4,3 +4,6 @@
 [submodule "language-server/typescript"]
 	path = language-server/typescript
 	url = git@github.com:typescript-language-server/typescript-language-server.git
+[submodule "site-lisp/copilot"]
+	path = site-lisp/copilot
+	url = git@github.com:copilot-emacs/copilot.el.git
