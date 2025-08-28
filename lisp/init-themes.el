@@ -9,12 +9,11 @@
 
 ;; Set the default theme for terminal and GUI emacs
 
-(maybe-require-package 'standard-themes)
-(maybe-require-package 'modus-themes)
+(maybe-require-package 'doom-themes)
 
 (if (display-graphic-p)
-    (load-theme 'standard-light t) 
-  (load-theme 'modus-vivendi-tinted t))
+    (load-theme 'doom-solarized-light t) 
+  (load-theme 'doom-one t))
 
 
 ;; Common Theme Config

@@ -11,16 +11,19 @@
 
 ;; Set English Font Family
 ;; (set-frame-font "Iosevka Nerd Font 16" nil t)
-(set-frame-font "FantasqueSansM Nerd Font Mono 16" nil t)
+;; (set-frame-font "FantasqueSansM Nerd Font Mono 16" nil t)
+(set-frame-font "Lilex Nerd Font Mono 14" nil t)
 
 ;; 设置中文字体
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font t charset (font-spec :family "LXGW WenKai" :size 15)))
 
-(set-face-attribute 'line-number nil
-                    :family "Fira Code"
-                    :height 135
-                    :weight 'normal)
+(add-hook 'after-init-hook
+  (lambda ()
+    (set-face-attribute 'line-number nil
+                        :family "Fira Code"
+                        :height 135
+                        :weight 'normal)))
 
 ;; Remove tool-bar; menu-bar; scroll-bar
 (tool-bar-mode -1)
