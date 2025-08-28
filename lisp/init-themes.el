@@ -11,10 +11,11 @@
 
 (maybe-require-package 'doom-themes)
 
-(if (display-graphic-p)
-    (load-theme 'doom-solarized-light t) 
-  (load-theme 'doom-one t))
-
+(add-hook 'after-init-hook
+          (lambda ()
+            (if (display-graphic-p)
+                (load-theme 'doom-solarized-light t)
+              (load-theme 'doom-one t))))
 
 ;; Common Theme Config
 (custom-set-faces
