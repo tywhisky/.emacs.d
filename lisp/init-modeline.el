@@ -2,41 +2,18 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Enable line and column numbers in the modeline
-(line-number-mode 1)
-(column-number-mode 1)
+(maybe-require-package 'doom-modeline)
+(doom-modeline-mode 1)
 
-;; Remove the box around the modeline
-(set-face-attribute 'mode-line nil :box nil)
+(setq doom-modeline-bar-width 0)
+(setq doom-modeline-major-mode-icon nil)
+(setq doom-modeline-buffer-state-icon nil)
+(setq doom-modeline-buffer-file-name-style 'relative-from-project)
 
-;; Font settings for modeline
-(let ((family "Lilex Nerd Font Mono")
-      (slant 'italic)
-      (height 0.95)
-      (weight 'light)
-      (box nil))
-  (custom-set-faces
-   `(mode-line ((t (:family ,family :slant ,slant :height ,height :weight ,weight :box ,box))))
-   `(mode-line-inactive ((t (:family ,family :slant ,slant :height ,height :weight ,weight :box ,box))))))
-
-;; Custom modeline format
-(setq-default mode-line-format
-              '("%e"
-                mode-line-front-space
-                ;; buffer modified status
-                (:eval (if (buffer-modified-p) "● " "  "))
-                ;; buffer name
-                mode-line-buffer-identification
-                "   "
-                ;; major mode
-                mode-line-modes
-                "   "
-                ;; position: line:column
-                (:eval (format "%l:%c"))
-                "   "
-                ;; file encoding
-                mode-line-mule-info
-                mode-line-end-spaces))
+(custom-set-faces
+  '(mode-line ((t (:slant italic))))
+  '(mode-line-active ((t (:slant italic))))
+  '(mode-line-inactive ((t (:slant italic)))))
 
 (provide 'init-modeline)
 ;;; init-modeline.el ends here
