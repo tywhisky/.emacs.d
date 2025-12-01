@@ -57,3 +57,4 @@
 (require 'init-javascript)
 (require 'init-golang)
 (require 'init-dotnet)
+(require 'init-haskell)
