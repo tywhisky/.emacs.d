@@ -24,11 +24,6 @@
   (with-eval-after-load 'corfu
     (corfu-popupinfo-mode))
   (setq-default corfu-popupinfo-delay 0.1)
-  
-  ;; Make Corfu also work in terminals, without disturbing usual behaviour in GUI
-  (when (maybe-require-package 'corfu-terminal)
-    (with-eval-after-load 'corfu
-      (corfu-terminal-mode)))
 
   ;; TODO: https://github.com/jdtsmith/kind-icon
   )

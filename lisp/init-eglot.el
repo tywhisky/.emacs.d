@@ -13,6 +13,7 @@
 (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
 (add-hook 'go-ts-mode-hook 'eglot-ensure)
 (add-hook 'csharp-mode 'eglot-ensure)
+(add-hook 'haskell-mode 'eglot-ensure)
 
 (provide 'init-eglot)
 ;;; init-eglot.el ends here

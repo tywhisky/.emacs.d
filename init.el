@@ -31,7 +31,6 @@
 (require 'init-snippet)
 (require 'init-spelling)
 (require 'init-treesitter)
-(require 'init-sis)
 
 
 ;; Development Tools
