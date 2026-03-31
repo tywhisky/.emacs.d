@@ -57,3 +57,4 @@
 (require 'init-golang)
 (require 'init-dotnet)
 (require 'init-haskell)
+(require 'init-python)
