@@ -9,14 +9,15 @@
 ;; LXGW WenKai
 ;; FantasqueSansM Nerd Font Propo
 
-;; Set English Font Family
-;; (set-frame-font "Iosevka Nerd Font 16" nil t)
-;; (set-frame-font "FantasqueSansM Nerd Font Mono 16" nil t)
-(set-frame-font "Lilex Nerd Font Mono 14" nil t)
+(when (display-graphic-p)
+  ;; Set English Font Family
+  ;; (set-frame-font "Iosevka Nerd Font 16" nil t)
+  ;; (set-frame-font "FantasqueSansM Nerd Font Mono 16" nil t)
+  (set-frame-font "Lilex Nerd Font Mono 14" nil t)
 
-;; 设置中文字体
-(dolist (charset '(kana han symbol cjk-misc bopomofo))
-  (set-fontset-font t charset (font-spec :family "LXGW WenKai" :size 15)))
+  ;; Set CJK font.
+  (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font t charset (font-spec :family "LXGW WenKai" :size 15))))
 
 (add-hook 'after-init-hook
   (lambda ()
@@ -26,9 +27,12 @@
                         :weight 'normal)))
 
 ;; Remove tool-bar; menu-bar; scroll-bar
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (fboundp 'menu-bar-mode)
+  (menu-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
 ;; Hide the title-bar with round corners, only for emacs 30+
 (add-to-list 'default-frame-alist '(undecorated-round . t))
 
@@ -51,7 +55,7 @@
 
 (maybe-require-package 'spacious-padding)
 
-(setq spacious-padding-windths
+(setq spacious-padding-widths
       '( :internal-border-width 15
          :header-line-width 4
          :mode-line-width 4
@@ -60,7 +64,8 @@
          :scroll-bar-width 8
          :fringe-width 0))
 
-(spacious-padding-mode 1)
+(when (fboundp 'spacious-padding-mode)
+  (spacious-padding-mode 1))
 
 
 

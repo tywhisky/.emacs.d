@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-auto-mode 'csharp-mode "\\.cs\\.csx\\'")
+(add-auto-mode 'csharp-mode "\\.cs\\'" "\\.csx\\'")
 
 (provide 'init-dotnet)
 ;;; init-dotnet.el ends here

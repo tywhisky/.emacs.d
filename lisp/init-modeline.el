@@ -2,8 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(maybe-require-package 'doom-modeline)
-(doom-modeline-mode 1)
+(when (maybe-require-package 'doom-modeline)
+  (doom-modeline-mode 1))
 
 (setq doom-modeline-bar-width 0)
 (setq doom-modeline-icon nil)

@@ -2,7 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(maybe-require-package 'elfeed)
+(when (maybe-require-package 'elfeed)
+  (maybe-require-package 'nerd-icons))
 
 (global-set-key (kbd "C-x w") 'elfeed)
 
@@ -20,11 +21,13 @@
 (defun nerd-icon-for-tags (tags)
   "Generate Nerd Font icon based on tags.
   Returns default if no match."
-  (cond ((member "youtube" tags)  (nerd-icons-faicon "nf-fa-youtube_play" :face '(:foreground "#FF0200")))
-        ((member "instagram" tags) (nerd-icons-faicon "nf-fa-instagram" :face '(:foreground "#FF00B9")))
-        ((member "emacs" tags) (nerd-icons-sucicon "nf-custom-emacs" :face '(:foreground "#9A5BBE")))
-        ((member "github" tags) (nerd-icons-faicon "nf-fa-github"))
-        (t (nerd-icons-faicon "nf-fae-feedly" :face '(:foreground "#2AB24C")))))
+  (if (not (fboundp 'nerd-icons-faicon))
+      ""
+    (cond ((member "youtube" tags) (nerd-icons-faicon "nf-fa-youtube_play" :face '(:foreground "#FF0200")))
+          ((member "instagram" tags) (nerd-icons-faicon "nf-fa-instagram" :face '(:foreground "#FF00B9")))
+          ((member "emacs" tags) (nerd-icons-sucicon "nf-custom-emacs" :face '(:foreground "#9A5BBE")))
+          ((member "github" tags) (nerd-icons-faicon "nf-fa-github"))
+          (t (nerd-icons-faicon "nf-fae-feedly" :face '(:foreground "#2AB24C"))))))
 
 (defun lucius/elfeed-search-print-entry--better-default (entry)
   "Print ENTRY to the buffer."
@@ -47,8 +50,6 @@
                                elfeed-search-title-min-width
                                title-width
                                elfeed-search-title-max-width) :left))
-
-         ​
          ;; Title/Feed ALIGNMENT
          (align-to-feed-pixel (+ date-width
                                  (max elfeed-search-title-min-width
@@ -62,7 +63,8 @@
               (propertize feed-title 'face 'elfeed-search-feed-face) " "))
     (when tags (insert "(" tags-str ")"))))
 
-(setq  elfeed-search-print-entry-function #'lucius/elfeed-search-print-entry--better-default)
+(with-eval-after-load 'elfeed-search
+  (setq elfeed-search-print-entry-function #'lucius/elfeed-search-print-entry--better-default))
 
 (provide 'init-elfeed)
 ;;; init-elfeed.el ends here

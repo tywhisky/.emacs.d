@@ -2,9 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(maybe-require-package 'mise)
-
-(add-hook 'after-init-hook #'global-mise-mode)
+(when (maybe-require-package 'mise)
+  (add-hook 'after-init-hook #'global-mise-mode))
 
 (provide 'init-mise)
 ;;; init-mise.el ends here

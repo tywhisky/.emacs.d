@@ -4,6 +4,7 @@
 
 (require-package 'unfill)
 (require-package 'diminish)
+(require 'ffap)
 
 (when (fboundp 'electric-pair-mode)
   (add-hook 'after-init-hook 'electric-pair-mode))
@@ -243,7 +244,7 @@
       (let ;; To make `end-of-line' and etc. to ignore fields.
           ((inhibit-field-text-motion t))
         (sort-subr nil 'forward-line 'end-of-line nil nil
-                   (lambda (s1 s2) (eq (random 2) 0)))))))
+                   (lambda (_s1 _s2) (eq (random 2) 0)))))))
 
 
 (require-package 'which-key)
@@ -264,9 +265,9 @@ ORIG is the advised function, which is called with its ARGS."
 (advice-add 'kmacro-call-macro :around 'sanityinc/disable-features-during-macro-call)
 
 
-(maybe-require-package 'super-save)
-(super-save-mode +1)
-(setq super-save-auto-save-when-idle t)
+(when (maybe-require-package 'super-save)
+  (setq super-save-auto-save-when-idle t)
+  (add-hook 'after-init-hook 'super-save-mode))
 
 
 (provide 'init-editing-utils)

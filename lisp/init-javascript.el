@@ -9,7 +9,12 @@
 
 ;;; Basic js-mode setup
 
-(add-to-list 'auto-mode-alist '("\\.\\(js\\|ts\\|tsx\\|es6\\)\\'" . typescript-ts-mode))
+(when (fboundp 'js-ts-mode)
+  (add-to-list 'auto-mode-alist '("\\.\\(js\\|mjs\\|cjs\\|es6\\)\\'" . js-ts-mode)))
+(when (fboundp 'typescript-ts-mode)
+  (add-to-list 'auto-mode-alist '("\\.\\(ts\\|mts\\|cts\\)\\'" . typescript-ts-mode)))
+(when (fboundp 'tsx-ts-mode)
+  (add-to-list 'auto-mode-alist '("\\.\\(tsx\\|jsx\\)\\'" . tsx-ts-mode)))
 
 (with-eval-after-load 'js
   (sanityinc/major-mode-lighter 'js-mode "JS")
@@ -28,7 +33,8 @@
   ;; ... but enable it if flycheck can't handle javascript
   (autoload 'flycheck-get-checker-for-buffer "flycheck")
   (defun sanityinc/enable-js2-checks-if-flycheck-inactive ()
-    (unless (flycheck-get-checker-for-buffer)
+    (unless (and (fboundp 'flycheck-get-checker-for-buffer)
+                 (flycheck-get-checker-for-buffer))
       (setq-local js2-mode-show-parse-errors t)
       (setq-local js2-mode-show-strict-warnings t)
       (when (derived-mode-p 'js-mode)
@@ -76,7 +82,7 @@
     "Bindings for communicating with an inferior js interpreter."
     :init-value nil :lighter " InfJS" :keymap inferior-js-minor-mode-map)
 
-  (dolist (hook '(js2-mode-hook js-mode-hook))
+  (dolist (hook '(js2-mode-hook js-mode-hook js-ts-mode-hook typescript-ts-mode-hook tsx-ts-mode-hook))
     (add-hook hook 'inferior-js-keys-mode)))
 
 

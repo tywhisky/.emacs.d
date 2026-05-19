@@ -6,6 +6,8 @@
 
 ;; Set the custom path to prevent the package-selected-packages generate in init.el
 (setq custom-file (locate-user-emacs-file "custom.el"))
+(when (file-exists-p custom-file)
+  (load custom-file nil 'nomessage))
 
 
 ;; Core
