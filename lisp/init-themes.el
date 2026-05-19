@@ -14,7 +14,7 @@
 (add-hook 'after-init-hook
           (lambda ()
             (if (display-graphic-p)
-                (load-theme 'doom-solarized-light t)
+                (load-theme 'modus-vivendi-tinted t)
               (load-theme 'doom-one t))))
 
 ;; Common Theme Config
