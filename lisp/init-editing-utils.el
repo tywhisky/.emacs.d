@@ -33,6 +33,8 @@
  truncate-lines nil
  truncate-partial-width-windows nil)
 
+(add-hook 'text-mode-hook 'visual-line-mode)
+
 (add-hook 'after-init-hook 'delete-selection-mode)
 
 (add-hook 'after-init-hook 'global-auto-revert-mode)
