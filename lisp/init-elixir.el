@@ -14,9 +14,9 @@
                    nil nil #'equal)
         (if (and (fboundp 'w32-shell-dos-semantics)
                  (w32-shell-dos-semantics))
-            '("expert_darwin_arm64")
+            '("expert_darwin_arm64" "--stdio")
           (eglot-alternatives
-           '("expert_darwin_arm64" "start_lexical.sh")))))
+           '(("expert_darwin_arm64" "--stdio") "start_lexical.sh")))))
 
 (add-hook 'elixir-ts-mode-hook
           (lambda ()
