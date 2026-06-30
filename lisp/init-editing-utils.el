@@ -83,6 +83,15 @@
 
 (global-set-key (kbd "S-<backspace>") 'kill-whole-line)
 
+(defun tywhisky/backward-delete-word (arg)
+  "Delete ARG words backward without saving them to the kill ring."
+  (interactive "p")
+  (let ((end (point)))
+    (backward-word arg)
+    (delete-region (point) end)))
+
+(global-set-key (kbd "C-<backspace>") 'tywhisky/backward-delete-word)
+
 
 
 (with-eval-after-load 'subword
