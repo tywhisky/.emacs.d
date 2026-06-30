@@ -45,8 +45,6 @@
 
 (add-hook 'after-init-hook 'transient-mark-mode)
 
-(global-hl-line-mode t)
-
 
 ;; Huge files
 
