@@ -3,6 +3,11 @@
 ;;; Code:
 
 (autoload 'copilot-mode "copilot" nil t)
+(autoload 'copilot-chat-insert-commit-message "copilot-chat" nil t)
+
+(with-eval-after-load 'git-commit
+  (define-key git-commit-mode-map (kbd "C-c C-g")
+              #'copilot-chat-insert-commit-message))
 
 (with-eval-after-load 'copilot
   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)

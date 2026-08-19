@@ -19,6 +19,10 @@
   "Idle seconds before checking registered language servers."
   :type 'number)
 
+(defconst lsp-update-directory
+  (locate-user-emacs-file "var/language-servers/")
+  "Directory containing managed language-server binaries.")
+
 (defvar lsp-update-servers nil
   "Alist of registered language servers and their properties.")
 
@@ -40,7 +44,7 @@
 (defun lsp-update-register (name &rest properties)
   "Register language server NAME with PROPERTIES.
 
-Required properties are :repository, :directory, and :asset.  :ASSET may
+Required properties are :repository and :asset.  :ASSET may
 be a release filename or a function returning one.  Optional :executable
 renames the downloaded file, :version-regexp reads an unmanaged binary's
 version, and :min-size sets the minimum accepted download size in bytes."
@@ -59,19 +63,27 @@ version, and :min-size sets the minimum accepted download size in bytes."
 (defun lsp-update-executable (name)
   "Return the managed executable path for server NAME."
   (let* ((properties (alist-get name lsp-update-servers))
-         (directory (lsp-update--property properties :directory))
          (executable (or (plist-get properties :executable)
-                         (lsp-update--asset properties))))
-    (expand-file-name executable directory)))
+                         (lsp-update--asset properties)))
+         (managed (seq-find
+                   #'file-executable-p
+                   (cons (expand-file-name executable lsp-update-directory)
+                         (file-expand-wildcards
+                          (expand-file-name (concat "*/" executable)
+                                            lsp-update-directory)
+                          t)))))
+    (or managed
+        (executable-find executable)
+        (expand-file-name executable lsp-update-directory))))
 
-(defun lsp-update--version-file (name properties)
-  "Return NAME's version-file path using PROPERTIES."
+(defun lsp-update--version-file (name)
+  "Return NAME's version-file path."
   (expand-file-name (format ".%s-version" name)
-                    (lsp-update--property properties :directory)))
+                    (file-name-directory (lsp-update-executable name))))
 
 (defun lsp-update--local-version (name properties)
   "Return NAME's installed version using PROPERTIES, or nil."
-  (let ((version-file (lsp-update--version-file name properties))
+  (let ((version-file (lsp-update--version-file name))
         (executable (lsp-update-executable name))
         (regexp (plist-get properties :version-regexp)))
     (cond
@@ -169,7 +181,7 @@ version, and :min-size sets the minimum accepted download size in bytes."
                 ;; The old server remains untouched until this atomic rename.
                 (rename-file temporary target t)
                 (setq temporary nil)
-                (with-temp-file (lsp-update--version-file name properties)
+                (with-temp-file (lsp-update--version-file name)
                   (insert version "\n"))
                 (message "%s updated to %s; restart its active LSP session"
                          name version))
