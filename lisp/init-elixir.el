@@ -3,6 +3,17 @@
 ;;; Code:
 
 (maybe-require-package 'elixir-ts-mode)
+(require 'init-lsp-update)
+
+(lsp-update-register
+ 'expert
+ :repository "expert-lsp/expert"
+ :directory (expand-file-name "~/.language-servers/elixir/")
+ :asset (lambda ()
+          (format "expert_%s_%s"
+                  (lsp-update-os)
+                  (lsp-update-architecture)))
+ :version-regexp "\"app_version\":\"\\([^\"]+\\)\"")
 
 (let ((lang-server (expand-file-name "~/.language-servers/elixir")))
   (setenv "PATH" (concat lang-server path-separator (getenv "PATH")))
@@ -12,11 +23,10 @@
   (setf (alist-get '(elixir-mode elixir-ts-mode heex-ts-mode)
                    eglot-server-programs
                    nil nil #'equal)
-        (if (and (fboundp 'w32-shell-dos-semantics)
-                 (w32-shell-dos-semantics))
-            '("expert_darwin_arm64" "--stdio")
-          (eglot-alternatives
-           '(("expert_darwin_arm64" "--stdio") "start_lexical.sh")))))
+        (eglot-alternatives
+         `((,(file-name-nondirectory (lsp-update-executable 'expert))
+            "--stdio")
+           "start_lexical.sh"))))
 
 (add-hook 'elixir-ts-mode-hook
           (lambda ()

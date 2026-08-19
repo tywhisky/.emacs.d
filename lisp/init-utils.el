@@ -29,6 +29,22 @@
   (interactive)
   (find-file user-init-file))
 
+(defun tywhisky/reload-config-file ()
+  "Save and reload the current Emacs config file, or the main init file."
+  (interactive)
+  (let* ((init-file (or user-init-file
+                        (user-error "No user init file is configured")))
+         (file (if (and buffer-file-name
+                       (or (file-equal-p buffer-file-name init-file)
+                           (file-in-directory-p buffer-file-name
+                                                user-emacs-directory)))
+                  buffer-file-name
+                init-file)))
+    (when (and (equal buffer-file-name file) (buffer-modified-p))
+      (save-buffer))
+    (load-file file)
+    (message "Reloaded %s" (abbreviate-file-name file))))
+
 (when (string= system-type "darwin")       
   (setq dired-use-ls-dired nil))
 
