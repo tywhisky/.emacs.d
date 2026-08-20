@@ -8,6 +8,10 @@
       mac-option-modifier       'alt
       mac-right-option-modifier 'alt)
 
+;; Do not enable an Emacs input method accidentally.
+(setq default-input-method nil)
+(global-unset-key (kbd "C-\\"))
+
 
 ;; Avoid accidentally suspending Emacs.
 (global-unset-key (kbd "C-z"))
