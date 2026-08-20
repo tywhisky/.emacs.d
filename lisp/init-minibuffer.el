@@ -12,6 +12,8 @@
       (define-key vertico-map (kbd "C-c C-c") 'embark-act)))
 
   (when (maybe-require-package 'consult)
+    (global-set-key (kbd "M-Y") #'consult-yank-pop)
+
     (defmacro sanityinc/no-consult-preview (&rest cmds)
       `(with-eval-after-load 'consult
          (consult-customize ,@cmds :preview-key "M-P")))

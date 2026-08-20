@@ -2,11 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Don't prompt to confirm theme safety. This avoids problems with
-;; first-time startup on Emacs > 26.3.
-(setq custom-safe-themes t)
-
-
 ;; Set the default theme for terminal and GUI emacs
 
 (maybe-require-package 'doom-themes)

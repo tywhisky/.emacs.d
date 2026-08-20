@@ -30,7 +30,7 @@ Or you can just clone all the submodule repos by:
 ** Font Family
 
 *** Editor
-- English: Maple Mono
+- English: Lilex Nerd Font Mono
 - Chinese: LXGW WenKai
 
 *** Modeline

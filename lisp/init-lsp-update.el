@@ -60,34 +60,40 @@ version, and :min-size sets the minimum accepted download size in bytes."
   (let ((asset (lsp-update--property properties :asset)))
     (if (functionp asset) (funcall asset) asset)))
 
+(defun lsp-update--managed-target (properties)
+  "Return the managed installation target described by PROPERTIES."
+  (expand-file-name (or (plist-get properties :executable)
+                        (lsp-update--asset properties))
+                    lsp-update-directory))
+
 (defun lsp-update-executable (name)
-  "Return the managed executable path for server NAME."
+  "Return the managed or PATH executable for server NAME."
   (let* ((properties (alist-get name lsp-update-servers))
-         (executable (or (plist-get properties :executable)
-                         (lsp-update--asset properties)))
+         (target (lsp-update--managed-target properties))
+         (executable (file-name-nondirectory target))
          (managed (seq-find
                    #'file-executable-p
-                   (cons (expand-file-name executable lsp-update-directory)
+                   (cons target
                          (file-expand-wildcards
                           (expand-file-name (concat "*/" executable)
                                             lsp-update-directory)
                           t)))))
     (or managed
         (executable-find executable)
-        (expand-file-name executable lsp-update-directory))))
+        target)))
 
 (defun lsp-update--version-file (name)
   "Return NAME's version-file path."
-  (expand-file-name (format ".%s-version" name)
-                    (file-name-directory (lsp-update-executable name))))
+  (expand-file-name (format ".%s-version" name) lsp-update-directory))
 
 (defun lsp-update--local-version (name properties)
   "Return NAME's installed version using PROPERTIES, or nil."
   (let ((version-file (lsp-update--version-file name))
+        (managed (lsp-update--managed-target properties))
         (executable (lsp-update-executable name))
         (regexp (plist-get properties :version-regexp)))
     (cond
-     ((file-readable-p version-file)
+     ((and (file-executable-p managed) (file-readable-p version-file))
       (string-trim (with-temp-buffer
                      (insert-file-contents version-file)
                      (buffer-string))))
@@ -117,13 +123,11 @@ version, and :min-size sets the minimum accepted download size in bytes."
         (json-key-type 'symbol))
     (json-read)))
 
-(defun lsp-update--asset-url (release asset-name)
-  "Return ASSET-NAME's download URL from RELEASE."
-  (when-let* ((asset (seq-find
-                      (lambda (candidate)
-                        (equal (alist-get 'name candidate) asset-name))
-                      (alist-get 'assets release))))
-    (alist-get 'browser_download_url asset)))
+(defun lsp-update--release-asset (release asset-name)
+  "Return ASSET-NAME's metadata from RELEASE."
+  (seq-find (lambda (candidate)
+              (equal (alist-get 'name candidate) asset-name))
+            (alist-get 'assets release)))
 
 (defun lsp-update--check-callback (status name properties)
   "Handle NAME's release response described by STATUS and PROPERTIES."
@@ -135,19 +139,23 @@ version, and :min-size sets the minimum accepted download size in bytes."
                    (latest (string-remove-prefix
                             "v" (alist-get 'tag_name release)))
                    (local (lsp-update--local-version name properties))
-                   (asset (lsp-update--asset properties))
-                   (url (lsp-update--asset-url release asset)))
-              (unless url
-                (error "Release %s has no %s asset" latest asset))
+                   (asset-name (lsp-update--asset properties))
+                   (asset (lsp-update--release-asset release asset-name))
+                   (url (alist-get 'browser_download_url asset))
+                   (digest (alist-get 'digest asset)))
+              (unless asset
+                (error "Release %s has no %s asset" latest asset-name))
+              (unless digest
+                (error "Release asset %s has no digest" asset-name))
               (when (or (null local) (version< local latest))
                 (run-at-time 0 nil #'lsp-update--offer
-                             name properties local latest url)))
+                             name properties local latest url digest)))
           (error (message "%s update check failed: %s" name
                           (error-message-string err)))))
     (kill-buffer (current-buffer))))
 
-(defun lsp-update--offer (name properties local latest url)
-  "Offer to update NAME from LOCAL to LATEST, downloading from URL."
+(defun lsp-update--offer (name properties local latest url digest)
+  "Offer to update NAME from LOCAL to LATEST using URL and DIGEST."
   (when (y-or-n-p
          (if local
              (format "%s %s is available (installed: %s). Update? "
@@ -155,11 +163,23 @@ version, and :min-size sets the minimum accepted download size in bytes."
            (format "%s %s is available. Install? " name latest)))
     (message "Downloading %s %s..." name latest)
     (url-retrieve url #'lsp-update--download-callback
-                  (list name properties latest) t t)))
+                  (list name properties latest digest) t t)))
 
-(defun lsp-update--download-callback (status name properties version)
-  "Install NAME VERSION using PROPERTIES when STATUS indicates success."
-  (let* ((target (lsp-update-executable name))
+(defun lsp-update--verify-digest (file digest)
+  "Verify FILE against GitHub's sha256 DIGEST."
+  (unless (and (stringp digest)
+               (string-match "\\`sha256:\\([[:xdigit:]]+\\)\\'" digest))
+    (error "Unsupported release-asset digest: %S" digest))
+  (let ((expected (downcase (match-string 1 digest))))
+    (with-temp-buffer
+      (set-buffer-multibyte nil)
+      (insert-file-contents-literally file)
+      (unless (string-equal expected (secure-hash 'sha256 (current-buffer)))
+        (error "Downloaded file failed SHA-256 verification")))))
+
+(defun lsp-update--download-callback (status name properties version digest)
+  "Install NAME VERSION using PROPERTIES after checking STATUS and DIGEST."
+  (let* ((target (lsp-update--managed-target properties))
          (directory (file-name-directory target))
          temporary)
     (unwind-protect
@@ -177,6 +197,7 @@ version, and :min-size sets the minimum accepted download size in bytes."
                 (when (< (file-attribute-size (file-attributes temporary))
                          (or (plist-get properties :min-size) (* 1024 1024)))
                   (error "Downloaded file is unexpectedly small"))
+                (lsp-update--verify-digest temporary digest)
                 (set-file-modes temporary #o755)
                 ;; The old server remains untouched until this atomic rename.
                 (rename-file temporary target t)

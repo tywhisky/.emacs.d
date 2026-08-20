@@ -5,11 +5,6 @@
 (require 'package)
 (require 'cl-lib)
 
-;;; Install into separate package dirs for each Emacs version, to prevent bytecode incompatibility
-(setq package-user-dir
-      (expand-file-name (format "elpa-%s.%s" emacs-major-version emacs-minor-version)
-                        user-emacs-directory))
-
 
 ;; TNUA ELPA
 ;; (add-to-list 'package-archives '("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/") t)
@@ -56,11 +51,20 @@ locate PACKAGE."
      (message "Couldn't install optional package `%s': %S" package err)
      nil)))
 
-;;; Fire up package.el
-
-(setq package-enable-at-startup nil)
 (setq package-native-compile t)
-(package-initialize)
+
+;; `custom.el' is intentionally untracked, so keep the direct package roots
+;; here.  This makes `package-autoremove' safe after a fresh installation.
+(customize-set-variable
+ 'package-selected-packages
+ '(avy beacon consult consult-eglot corfu dhall-mode diff-hl docker
+   doom-modeline doom-themes eat elfeed embark embark-consult erlang
+   exec-path-from-shell flymake-ruff git-modes gptel haskell-mode
+   ibuffer-vc js-comint magit marginalia markdown-mode mise mode-line-bell
+   moom move-dup multiple-cursors nerd-icons orderless page-break-lines
+   pip-requirements rainbow-delimiters reformatter ruff-format
+   spacious-padding symbol-overlay unfill vertico vlf whole-line-or-region
+   yasnippet yasnippet-snippets))
 
 (provide 'init-elpa)
 ;;; init-elpa.el ends here

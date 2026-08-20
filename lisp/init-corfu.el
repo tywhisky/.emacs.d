@@ -22,7 +22,7 @@
   (add-hook 'after-init-hook 'global-corfu-mode)
 
   (with-eval-after-load 'corfu
-    (corfu-popupinfo-mode))
+    (corfu-popupinfo-mode 1))
   (setq-default corfu-popupinfo-delay 0.1)
 
   ;; TODO: https://github.com/jdtsmith/kind-icon

@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(maybe-require-package 'elixir-ts-mode)
 (require 'init-lsp-update)
 
 (lsp-update-register
@@ -22,9 +21,15 @@
          `((,(lsp-update-executable 'expert) "--stdio")
            "start_lexical.sh"))))
 
+(defun tywhisky/elixir-format-buffer-maybe ()
+  "Format the current Elixir buffer when Eglot manages it."
+  (when (eglot-managed-p)
+    (eglot-format-buffer)))
+
 (add-hook 'elixir-ts-mode-hook
           (lambda ()
-            (add-hook 'before-save-hook #'eglot-format nil t)))
+            (add-hook 'before-save-hook
+                      #'tywhisky/elixir-format-buffer-maybe nil t)))
 
 (add-hook 'elixir-ts-mode-hook 'eglot-ensure)
 

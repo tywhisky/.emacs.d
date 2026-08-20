@@ -49,7 +49,6 @@
 
 (global-display-line-numbers-mode t)
 
-(setq make-backup-files nil)
 (setq inhibit-startup-screen t)
 
 

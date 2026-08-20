@@ -2,13 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-(when (maybe-require-package 'eglot)
-  (maybe-require-package 'consult-eglot))
+(maybe-require-package 'consult-eglot)
 
 (with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs '((js-ts-mode typescript-ts-mode) "typescript-language-server" "--stdio"))
-  (add-to-list 'eglot-server-programs '(go-ts-mode "gopls"))
-  (add-to-list 'eglot-server-programs '((csharp-mode csharp-ts-mode) "~/.language-servers/dotnet/OmniSharp" "-lsp")))
+  (setf (alist-get '(csharp-mode csharp-ts-mode)
+                   eglot-server-programs nil nil #'equal)
+        '("~/.language-servers/dotnet/OmniSharp" "-lsp")))
 
 (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
 (add-hook 'go-ts-mode-hook 'eglot-ensure)

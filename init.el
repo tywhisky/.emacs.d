@@ -2,7 +2,7 @@
 
 ;; Load the `lisp` and `site-lisp` directory
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "site-lisp"))
+(add-to-list 'load-path (locate-user-emacs-file "site-lisp/"))
 
 ;; Set the custom path to prevent the package-selected-packages generate in init.el
 (setq custom-file (locate-user-emacs-file "custom.el"))
@@ -39,7 +39,6 @@
 (require 'init-eglot)
 (require 'init-git)
 (require 'init-terminals)
-(require 'init-projectile)
 (require 'init-docker)
 (require 'init-mise)
 

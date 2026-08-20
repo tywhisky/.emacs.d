@@ -2,8 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(maybe-require-package 'go-ts-mode)
-
 (defun tywhisky/setup-go-indentation ()
   "Use Go's conventional tab indentation."
   (setq-local indent-tabs-mode t)

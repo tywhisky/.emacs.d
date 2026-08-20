@@ -3,12 +3,10 @@
 ;;; Code:
 
 (require-package 'unfill)
-(require-package 'diminish)
 (require 'ffap)
 
 (when (fboundp 'electric-pair-mode)
   (add-hook 'after-init-hook 'electric-pair-mode))
-(add-hook 'after-init-hook 'electric-indent-mode)
 
 
 ;;; Some basic preferences
@@ -22,9 +20,6 @@
  ediff-split-window-function 'split-window-horizontally
  ediff-window-setup-function 'ediff-setup-windows-plain
  indent-tabs-mode nil
- create-lockfiles nil
- auto-save-default nil
- make-backup-files nil
  mouse-yank-at-point t
  save-interprogram-paste-before-kill t
  scroll-preserve-screen-position 'always
@@ -33,6 +28,15 @@
  truncate-lines nil
  truncate-partial-width-windows nil)
 
+(let ((backup-dir (locate-user-emacs-file "var/backups/"))
+      (auto-save-dir (locate-user-emacs-file "var/auto-save/")))
+  (make-directory backup-dir t)
+  (make-directory auto-save-dir t)
+  (setq backup-directory-alist `(("." . ,backup-dir))
+        auto-save-file-name-transforms `((".*" ,auto-save-dir t))))
+
+(setq mode-line-collapse-minor-modes t)
+
 (add-hook 'text-mode-hook 'visual-line-mode)
 
 (add-hook 'after-init-hook 'delete-selection-mode)
@@ -40,8 +44,6 @@
 (add-hook 'after-init-hook 'global-auto-revert-mode)
 (setq global-auto-revert-non-file-buffers t
       auto-revert-verbose nil)
-(with-eval-after-load 'autorevert
-  (diminish 'auto-revert-mode))
 
 (add-hook 'after-init-hook 'transient-mark-mode)
 
@@ -92,18 +94,8 @@
 
 
 
-(with-eval-after-load 'subword
-  (diminish 'subword-mode))
-
-
 (global-display-fill-column-indicator-mode 1)
-
-
-(when (fboundp 'display-line-numbers-mode)
-  (setq-default display-line-numbers-width 3)
-  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-  (add-hook 'yaml-mode-hook 'display-line-numbers-mode)
-  (add-hook 'yaml-ts-mode-hook 'display-line-numbers-mode))
+(setq-default display-line-numbers-width 3)
 
 
 
@@ -112,10 +104,9 @@
 
 
 (when (maybe-require-package 'symbol-overlay)
-  (dolist (hook '(prog-mode-hook html-mode-hook yaml-mode-hook conf-mode-hook))
+  (dolist (hook '(prog-mode-hook html-mode-hook yaml-ts-mode-hook conf-mode-hook))
     (add-hook hook 'symbol-overlay-mode))
   (with-eval-after-load 'symbol-overlay
-    (diminish 'symbol-overlay-mode)
     (define-key symbol-overlay-mode-map (kbd "M-i") 'symbol-overlay-put)
     (define-key symbol-overlay-mode-map (kbd "M-I") 'symbol-overlay-remove-all)
     (define-key symbol-overlay-mode-map (kbd "M-n") 'symbol-overlay-jump-next)
@@ -124,18 +115,6 @@
 
 ;;; Zap *up* to char is a handy pair for zap-to-char
 (global-set-key (kbd "M-Z") 'zap-up-to-char)
-
-
-
-(require-package 'browse-kill-ring)
-(setq browse-kill-ring-separator "\f")
-(global-set-key (kbd "M-Y") 'browse-kill-ring)
-(with-eval-after-load 'browse-kill-ring
-  (define-key browse-kill-ring-mode-map (kbd "C-g") 'browse-kill-ring-quit)
-  (define-key browse-kill-ring-mode-map (kbd "M-n") 'browse-kill-ring-forward)
-  (define-key browse-kill-ring-mode-map (kbd "M-p") 'browse-kill-ring-previous))
-(with-eval-after-load 'page-break-lines
-  (add-to-list 'page-break-lines-modes 'browse-kill-ring-mode))
 
 
 ;; Don't disable narrowing commands
@@ -197,9 +176,7 @@
 ;;; Page break lines
 
 (when (maybe-require-package 'page-break-lines)
-  (add-hook 'after-init-hook 'global-page-break-lines-mode)
-  (with-eval-after-load 'page-break-lines
-    (diminish 'page-break-lines-mode)))
+  (add-hook 'after-init-hook 'global-page-break-lines-mode))
 
 
 
@@ -233,8 +210,6 @@
 ;;; Cut/copy the current line if no region is active
 (require-package 'whole-line-or-region)
 (add-hook 'after-init-hook 'whole-line-or-region-global-mode)
-(with-eval-after-load 'whole-line-or-region
-  (diminish 'whole-line-or-region-local-mode))
 
 
 
@@ -256,11 +231,8 @@
                    (lambda (_s1 _s2) (eq (random 2) 0)))))))
 
 
-(require-package 'which-key)
 (add-hook 'after-init-hook 'which-key-mode)
 (setq-default which-key-idle-delay 1.5)
-(with-eval-after-load 'which-key
-  (diminish 'which-key-mode))
 
 
 (defun sanityinc/disable-features-during-macro-call (orig &rest args)
@@ -274,9 +246,7 @@ ORIG is the advised function, which is called with its ARGS."
 (advice-add 'kmacro-call-macro :around 'sanityinc/disable-features-during-macro-call)
 
 
-(when (maybe-require-package 'super-save)
-  (setq super-save-auto-save-when-idle t)
-  (add-hook 'after-init-hook 'super-save-mode))
+(auto-save-visited-mode 1)
 
 
 (provide 'init-editing-utils)

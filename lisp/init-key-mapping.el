@@ -9,8 +9,7 @@
       mac-right-option-modifier 'alt)
 
 
-;; Rebind the 'suspend-frame especially on WSL
-(global-set-key (kbd "C-x 5") 'suspend-frame)
+;; Avoid accidentally suspending Emacs.
 (global-unset-key (kbd "C-z"))
 
 
