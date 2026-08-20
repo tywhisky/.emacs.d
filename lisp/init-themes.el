@@ -2,15 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Set the default theme for terminal and GUI emacs
+;; Set the default theme for terminal and GUI Emacs.
 
-(maybe-require-package 'doom-themes)
+(maybe-require-package 'doric-themes)
 
 (add-hook 'after-init-hook
           (lambda ()
-            (if (display-graphic-p)
-                (load-theme 'modus-vivendi-tinted t)
-              (load-theme 'doom-one t))))
+            (doric-themes-select 'doric-light)))
 
 ;; Common Theme Config
 (custom-set-faces

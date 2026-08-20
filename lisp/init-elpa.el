@@ -58,7 +58,7 @@ locate PACKAGE."
 (customize-set-variable
  'package-selected-packages
  '(avy beacon consult consult-eglot corfu dhall-mode diff-hl docker
-   doom-modeline doom-themes eat elfeed embark embark-consult erlang
+   doom-modeline doric-themes eat elfeed embark embark-consult erlang
    exec-path-from-shell flymake-ruff git-modes gptel haskell-mode
    ibuffer-vc js-comint magit marginalia markdown-mode mise mode-line-bell
    moom move-dup multiple-cursors nerd-icons orderless page-break-lines
