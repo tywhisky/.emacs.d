@@ -64,9 +64,8 @@
     (vlf file)))
 
 
-;;; A simple visible bell which works in all terminal types
-(require-package 'mode-line-bell)
-(add-hook 'after-init-hook 'mode-line-bell-mode)
+;; Keep boundary errors quiet; their messages still appear in the echo area.
+(setq ring-bell-function #'ignore)
 
 
 
