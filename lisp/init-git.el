@@ -11,10 +11,10 @@
 
 (when (maybe-require-package 'diff-hl)
   (setq diff-hl-margin-symbols-alist
-        '((insert . "  ") (delete . "  ") (change . "  ")
-          (unknown . "? ") (ignored . "i ") (reference . "  ")))
+        '((insert . " ") (delete . " ") (change . " ")
+          (unknown . "?") (ignored . "i") (reference . " ")))
   (add-hook 'diff-hl-mode-on-hook
-            (lambda () (setq-local left-margin-width 2)))
+            (lambda () (setq-local left-margin-width 1)))
   (global-diff-hl-mode 1)
   (diff-hl-margin-mode 1)
   (diff-hl-flydiff-mode 1)
