@@ -59,9 +59,14 @@
          :header-line-width 4
          :mode-line-width 4
          :tab-width 4
-         :right-divider-width 30
+         :right-divider-width 1
          :scroll-bar-width 8
          :fringe-width 0))
+
+(setq window-divider-default-places t
+      window-divider-default-right-width 1
+      window-divider-default-bottom-width 1)
+(window-divider-mode 1)
 
 (when (fboundp 'spacious-padding-mode)
   (spacious-padding-mode 1))

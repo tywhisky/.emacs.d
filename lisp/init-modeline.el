@@ -5,7 +5,7 @@
 (when (maybe-require-package 'doom-modeline)
   (doom-modeline-mode 1))
 
-(setq doom-modeline-bar-width 0)
+(setq doom-modeline-bar-width 3)
 (setq doom-modeline-icon nil)
 (setq doom-modeline-buffer-file-name-style 'relative-from-project)
 
