@@ -8,6 +8,8 @@
 (require-package 'git-modes)
 (maybe-require-package 'magit)
 (setq magit-auto-revert-mode t)
+(add-hook 'magit-mode-hook
+          (lambda () (setq left-fringe-width 24)))
 
 (when (maybe-require-package 'diff-hl)
   (setq diff-hl-margin-symbols-alist
