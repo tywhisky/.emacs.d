@@ -10,7 +10,6 @@
         '("~/.language-servers/dotnet/OmniSharp" "-lsp")))
 
 (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
-(add-hook 'go-ts-mode-hook 'eglot-ensure)
 (add-hook 'csharp-mode-hook 'eglot-ensure)
 (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
 (add-hook 'haskell-mode-hook 'eglot-ensure)

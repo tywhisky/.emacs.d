@@ -1,7 +1,7 @@
-;;; init-lsp-update.el --- Update language-server binaries  -*- lexical-binding: t; -*-
+;;; init-lsp-update.el --- Update language servers  -*- lexical-binding: t; -*-
 ;;; Commentary:
-;; Register GitHub-hosted language-server binaries, check them after startup,
-;; and replace an installed binary only after its download succeeds.
+;; Register GitHub-hosted language servers, check them after startup, and
+;; install releases from either a verified binary asset or a build command.
 ;;; Code:
 
 (require 'json)
@@ -44,10 +44,12 @@
 (defun lsp-update-register (name &rest properties)
   "Register language server NAME with PROPERTIES.
 
-Required properties are :repository and :asset.  :ASSET may
-be a release filename or a function returning one.  Optional :executable
-renames the downloaded file, :version-regexp reads an unmanaged binary's
-version, and :min-size sets the minimum accepted download size in bytes."
+Required property :repository names its GitHub repository.  Use either
+:asset for a release binary or :install-command for a function of VERSION
+that returns an argv list.  Optional :tag-prefix defaults to \"v\",
+:executable names the installed file, :version-arguments runs that executable
+to obtain text matched by :version-regexp, and :min-size sets the minimum
+download size in bytes."
   (setf (alist-get name lsp-update-servers) properties))
 
 (defun lsp-update--property (properties key)
@@ -65,6 +67,15 @@ version, and :min-size sets the minimum accepted download size in bytes."
   (expand-file-name (or (plist-get properties :executable)
                         (lsp-update--asset properties))
                     lsp-update-directory))
+
+(defun lsp-update--latest-version (release properties)
+  "Return RELEASE's version after removing PROPERTIES' tag prefix."
+  (string-remove-prefix (or (plist-get properties :tag-prefix) "v")
+                        (alist-get 'tag_name release)))
+
+(defun lsp-update--install-command (properties version)
+  "Return PROPERTIES' installation command for VERSION."
+  (funcall (lsp-update--property properties :install-command) version))
 
 (defun lsp-update-executable (name)
   "Return the managed or PATH executable for server NAME."
@@ -91,12 +102,19 @@ version, and :min-size sets the minimum accepted download size in bytes."
   (let ((version-file (lsp-update--version-file name))
         (managed (lsp-update--managed-target properties))
         (executable (lsp-update-executable name))
+        (arguments (plist-get properties :version-arguments))
         (regexp (plist-get properties :version-regexp)))
     (cond
      ((and (file-executable-p managed) (file-readable-p version-file))
       (string-trim (with-temp-buffer
                      (insert-file-contents version-file)
                      (buffer-string))))
+     ((and regexp arguments (file-executable-p executable))
+      (with-temp-buffer
+        (when (zerop (apply #'process-file executable nil t nil arguments))
+          (goto-char (point-min))
+          (when (re-search-forward regexp nil t)
+            (match-string 1)))))
      ((and regexp (file-readable-p executable))
       (with-temp-buffer
         (set-buffer-multibyte nil)
@@ -136,34 +154,68 @@ version, and :min-size sets the minimum accepted download size in bytes."
           (message "%s update check failed: %s" name failure)
         (condition-case err
             (let* ((release (lsp-update--release))
-                   (latest (string-remove-prefix
-                            "v" (alist-get 'tag_name release)))
-                   (local (lsp-update--local-version name properties))
-                   (asset-name (lsp-update--asset properties))
-                   (asset (lsp-update--release-asset release asset-name))
-                   (url (alist-get 'browser_download_url asset))
-                   (digest (alist-get 'digest asset)))
-              (unless asset
-                (error "Release %s has no %s asset" latest asset-name))
-              (unless digest
-                (error "Release asset %s has no digest" asset-name))
+                   (latest (lsp-update--latest-version release properties))
+                   (local (lsp-update--local-version name properties)))
               (when (or (null local) (version< local latest))
-                (run-at-time 0 nil #'lsp-update--offer
-                             name properties local latest url digest)))
+                (if (plist-get properties :install-command)
+                    (run-at-time 0 nil #'lsp-update--offer-command
+                                 name properties local latest)
+                  (let* ((asset-name (lsp-update--asset properties))
+                         (asset (lsp-update--release-asset release asset-name))
+                         (url (alist-get 'browser_download_url asset))
+                         (digest (alist-get 'digest asset)))
+                    (unless asset
+                      (error "Release %s has no %s asset" latest asset-name))
+                    (unless digest
+                      (error "Release asset %s has no digest" asset-name))
+                    (run-at-time 0 nil #'lsp-update--offer
+                                 name properties local latest url digest)))))
           (error (message "%s update check failed: %s" name
                           (error-message-string err)))))
     (kill-buffer (current-buffer))))
 
+(defun lsp-update--confirm-p (name local latest)
+  "Ask whether to update NAME from LOCAL to LATEST."
+  (y-or-n-p
+   (if local
+       (format "%s %s is available (installed: %s). Update? "
+               name latest local)
+     (format "%s %s is available. Install? " name latest))))
+
 (defun lsp-update--offer (name properties local latest url digest)
   "Offer to update NAME from LOCAL to LATEST using URL and DIGEST."
-  (when (y-or-n-p
-         (if local
-             (format "%s %s is available (installed: %s). Update? "
-                     name latest local)
-           (format "%s %s is available. Install? " name latest)))
+  (when (lsp-update--confirm-p name local latest)
     (message "Downloading %s %s..." name latest)
     (url-retrieve url #'lsp-update--download-callback
                   (list name properties latest digest) t t)))
+
+(defun lsp-update--offer-command (name properties local latest)
+  "Offer to install NAME LATEST using PROPERTIES' command."
+  (when (lsp-update--confirm-p name local latest)
+    (let* ((target (lsp-update--managed-target properties))
+           (buffer (get-buffer-create (format "*%s install*" name))))
+      (make-directory (file-name-directory target) t)
+      (with-current-buffer buffer (erase-buffer))
+      (message "Installing %s %s..." name latest)
+      (make-process
+       :name (format "%s-install" name)
+       :buffer buffer
+       :command (lsp-update--install-command properties latest)
+       :noquery t
+       :sentinel
+       (lambda (process _event)
+         (when (memq (process-status process) '(exit signal))
+           (if (and (zerop (process-exit-status process))
+                    (file-executable-p target))
+               (progn
+                 (with-temp-file (lsp-update--version-file name)
+                   (insert latest "\n"))
+                 (kill-buffer buffer)
+                 (message "%s updated to %s; restart its active LSP session"
+                          name latest))
+             (display-buffer buffer)
+             (message "%s installation failed; see %s"
+                      name (buffer-name buffer)))))))))
 
 (defun lsp-update--verify-digest (file digest)
   "Verify FILE against GitHub's sha256 DIGEST."
