@@ -10,6 +10,9 @@
 ;; FantasqueSansM Nerd Font Propo
 
 (when (display-graphic-p)
+  (setq display-hourglass t
+        hourglass-delay 0.3)
+
   ;; Set English Font Family
   ;; (set-frame-font "Iosevka Nerd Font 16" nil t)
   ;; (set-frame-font "FantasqueSansM Nerd Font Mono 16" nil t)
