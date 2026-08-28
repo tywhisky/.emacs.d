@@ -11,6 +11,34 @@
 
 (require-package 'pip-requirements)
 
+(require 'init-lsp-update)
+
+(lsp-update-register
+ 'basedpyright
+ :repository "detachhead/basedpyright"
+ :executable "basedpyright"
+ :install-command
+ (lambda (version)
+   (list "env"
+         (concat "UV_TOOL_DIR="
+                 (expand-file-name ".uv-tools" lsp-update-directory))
+         (concat "UV_TOOL_BIN_DIR="
+                 (directory-file-name lsp-update-directory))
+         "uv" "tool" "install" "--force"
+         (format "basedpyright==%s" version)))
+ :version-arguments '("--version")
+ :version-regexp "basedpyright \\([0-9.]+\\)")
+
+(with-eval-after-load 'eglot
+  (let ((basedpyright (lsp-update-executable 'basedpyright)))
+    (setf (alist-get '(python-mode python-ts-mode)
+                     eglot-server-programs nil nil #'equal)
+          `(,(expand-file-name "basedpyright-langserver"
+                               (file-name-directory basedpyright))
+            "--stdio"))))
+
+(add-hook 'python-base-mode-hook #'eglot-ensure)
+
 (when (maybe-require-package 'flymake-ruff)
   (defun sanityinc/flymake-ruff-maybe-enable ()
     (when (executable-find "ruff")

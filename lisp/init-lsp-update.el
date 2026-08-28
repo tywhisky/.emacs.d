@@ -20,7 +20,7 @@
   :type 'number)
 
 (defconst lsp-update-directory
-  (locate-user-emacs-file "var/language-servers/")
+  (expand-file-name (locate-user-emacs-file "var/language-servers/"))
   "Directory containing managed language-server binaries.")
 
 (defvar lsp-update-servers nil
