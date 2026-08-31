@@ -246,6 +246,10 @@ ORIG is the advised function, which is called with its ARGS."
 
 
 (auto-save-visited-mode 1)
+(add-hook 'buffer-list-update-hook
+          (lambda ()
+            (let (buffer-list-update-hook)
+              (save-some-buffers t))))
 
 
 (provide 'init-editing-utils)
