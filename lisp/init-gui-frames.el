@@ -79,6 +79,7 @@
 ;; Initialize the settings
 (setq scroll-conservatively 101) ; important!
 (setq scroll-margin 0)
+(pixel-scroll-precision-mode 1)
 
 (global-set-key (kbd "<pinch>") 'ignore)
 (global-set-key (kbd "<C-wheel-up>") 'ignore)
