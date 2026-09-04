@@ -28,6 +28,7 @@
 
 ;; Editing Enhancements
 (require 'init-key-mapping)
+(require 'init-clean-copy)
 (require 'init-markdown)
 (require 'init-corfu)
 (require 'init-snippet)
